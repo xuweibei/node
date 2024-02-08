@@ -19,5 +19,10 @@ setTimeout(() => {
 // 1 nextTick then 2
 // nextTick比promise还快一些
 setTmmediate(() => {
+  //ie下才有这个方法
   console.log(11)
 })
+
+//macrotask 宏任务 script、UI、setTimeout、setInterval、requestFrameAnimation、setTmmediate
+
+//microtask 微任务 promise.then mutationObserver nextTick
