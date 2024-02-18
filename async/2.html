@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="button">button</div>
+    <script>
+      button.addEventListener('click', () => {
+        console.log('l1')
+        Promise.resolve().then((data) => {
+          console.log('p1')
+        })
+      })
+      button.addEventListener('click', () => {
+        console.log('l2')
+        Promise.resolve().then((data) => {
+          console.log('p2')
+        })
+      })
+      button.click()
+      //此时的eventloop是， l1,l2,p1,p2 因为button.click()直接调用了，就让函数立即执行
+      // 如果直接点击按钮的话，则eventloop为 ， l1,p1,l2,p2, 这种情况的原因是，直接点击按钮的时候，
+      //浏览器将点击事件作为宏任务给添加到队列里，等到gui渲染完，再从宏任务队列里取出一个任务来执行，先进去的是上面那个方法
+      //就先执行，所以l1完事之后就进入p1的微任务，完事了再走下面的那个宏任务
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log(1)
+      Promise.resolve().then(() => {
+        console.log('p1')
+        setTimeout(() => {
+          console.log('s1')
+        })
+      })
+      setTimeout(() => {
+        console.log('s2')
+        Promise.resolve().then((data) => {
+          console.log('p2')
+        })
+      })
+      console.log(2)
+      //定时器不加时间的话，按先进入宏任务队列的顺序，先进先出来执行  1,2,p1,s2,p2,s1
+      // 定时器加了时间之后，就按时间执行，短时间的先执行  1,2,p1,s1,s2,p2
+    </script>
+  </body>
+</html>

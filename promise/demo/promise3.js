@@ -132,10 +132,10 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 }
 
 MyPromise.prototype.catch = function (reject) {
-  return MyPromise.prototype.then(null, reject)
+  return this.then(null, reject)
 }
 
-MyPromise.prototype.all = function (promises) {
+MyPromise.all = function (promises) {
   return new MyPromise((resolve, reject) => {
     let result = []
     let count = 0
